@@ -1,19 +1,19 @@
-const { validate, validateObj } = require( "../index" );
+const validate = require( "../index" );
 
 describe( "proba", () => {
 
-  describe( "validateObj params", () => {
+  describe( "validate.obj params", () => {
 
     it( "throw when first param of wrong type", () => {
       expect(() => {
-        validateObj("A", {});
-      }).toThrowError( /validateObj: Argument #1: Expected object but got string/ );
+        validate.obj("A", {});
+      }).toThrowError( /validate.obj: Argument #1: Expected object but got string/ );
     });
 
     it( "throw when second param of wrong type", () => {
       expect(() => {
-        validateObj({}, "A");
-      }).toThrowError( /validateObj: Argument #2: Expected object but got string/ );
+        validate.obj({}, "A");
+      }).toThrowError( /validate.obj: Argument #2: Expected object but got string/ );
     });
 
   });
@@ -22,7 +22,7 @@ describe( "proba", () => {
 
     it( "throw when missing property", () => {
       expect(() => {
-        validateObj({
+        validate.obj({
           "foo": "S"
         }, {});
       }).toThrowError( /Missing required property #foo/ );
@@ -30,7 +30,7 @@ describe( "proba", () => {
 
     it( "throw when missing property", () => {
       expect(() => {
-        validateObj({
+        validate.obj({
           "foo": "S"
         }, { foo: 1 });
       }).toThrowError( /Invalid type in property #foo: Expected string but got number/ );
@@ -38,7 +38,7 @@ describe( "proba", () => {
 
     it( "does not throw when valid", () => {
       expect(() => {
-        validateObj({
+        validate.obj({
           "foo": "N",
           "bar": "S"
         }, { foo: 1, bar: "string" });
@@ -51,7 +51,7 @@ describe( "proba", () => {
 
     it( "throw when missing 1st-level property", () => {
       expect(() => {
-        validateObj({
+        validate.obj({
           foo: { bar: "S" }
         }, {});
       }).toThrowError( /Missing required property #foo/ );
@@ -59,7 +59,7 @@ describe( "proba", () => {
 
     it( "throw when missing 2st-level property", () => {
       expect(() => {
-        validateObj({
+        validate.obj({
           foo: { bar: "S" }
         }, { foo: {} });
       }).toThrowError( /Missing required property #foo.bar/ );
@@ -67,7 +67,7 @@ describe( "proba", () => {
 
     it( "throw when 1st-level property on invalid type", () => {
       expect(() => {
-        validateObj({
+        validate.obj({
           foo: { bar: "S" }
         }, { foo: 1 });
       }).toThrowError( /Invalid type in property #foo: Expected object but got number/ );
@@ -75,7 +75,7 @@ describe( "proba", () => {
 
     it( "throw when 2st-level property of invalid type", () => {
       expect(() => {
-        validateObj({
+        validate.obj({
           foo: { bar: "S" }
         }, { foo: { bar: 1 } });
       }).toThrowError( /Invalid type in property #foo.bar: Expected string but got number/ );
@@ -83,7 +83,7 @@ describe( "proba", () => {
 
     it( "does not throw when 2st-level property valid", () => {
       expect(() => {
-        validateObj({
+        validate.obj({
           bar: "A",
           foo: {
             bar: "N",

@@ -26,17 +26,17 @@ function normalizeErrMsg( msg, extMsg ) {
  * @param {Object} obj
  * @param {String} [propPath]
  */
-function validateObj( schema, obj, propPath = "" ) {
+validate.obj = function( schema, obj, propPath = "" ) {
   try {
     validate( "OO|OOS", arguments );
   } catch ( err ) {
-    throw new newException( err.code, "validateObj: " + err.message );
+    throw new newException( err.code, "validate.obj: " + err.message );
   }
   Object.keys( schema ).forEach(function( key ){
     if ( !( key in obj ) ) {
       throw new newException( "EMISSINGPROP", "Missing required property #" + normalizeProp( key, propPath ) );
     }
-    // validateObj( { foo: { bar: "A" } }, obj )
+    // validate.obj( { foo: { bar: "A" } }, obj )
     if ( typeof schema[ key ] === "object" && schema[ key ] !== null && !Array.isArray( schema[ key ] ) ) {
       try {
         validate( "O", [ obj[ key ] ] );
@@ -45,7 +45,7 @@ function validateObj( schema, obj, propPath = "" ) {
           err.message,
           "Invalid type in property #" + normalizeProp( key, propPath ) + ":" ) );
       }
-      return validateObj( schema[ key ], obj[ key ], key + "." );
+      return validate.obj( schema[ key ], obj[ key ], key + "." );
     }
 
     try {
@@ -56,7 +56,6 @@ function validateObj( schema, obj, propPath = "" ) {
         "Invalid type in property #" + normalizeProp( key, propPath ) + ":" ) );
     }
   });
-}
+};
 
-exports.validate = validate;
-exports.validateObj = validateObj;
+module.exports = validate;
