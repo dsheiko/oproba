@@ -1,4 +1,5 @@
 # oproba
+[![NPM](https://nodei.co/npm/oproba.png)](https://nodei.co/npm/oproba/)
 
 [![Build Status](https://travis-ci.org/dsheiko/oproba.png)](https://travis-ci.org/dsheiko/oproba)
 
