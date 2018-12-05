@@ -3,13 +3,13 @@
 
 [![Build Status](https://travis-ci.org/dsheiko/oproba.png)](https://travis-ci.org/dsheiko/oproba)
 
-A 'rediculously light-weight' extension of [aproba](https://github.com/iarna/aproba) for key-value object validation
+A 'rediculously light-weight' extension of [aproba - argument validator](https://github.com/iarna/aproba) for key-value object validation
 
 ```js
 const validate = require( "oproba" );
 // 'validate' is instance of aproba
 
-// Check that `options` object properties comply specified aproba schemas
+// Check that `options` object properties comply specified aproba constraints
 validate.obj({ foo: "N", bar: "S|N" }, options );
 
 
@@ -37,3 +37,17 @@ validate.obj({ foo: "N?", bar: "S|N?" }, options );
   });
 // throws `Error: Invalid type in property #foo.bar: Expected string or null but got number`
 ```
+
+## Aproba constraints:
+
+| type | description
+| :--: | :----------
+| *    | matches any type
+| A    | `Array.isArray` OR an `arguments` object
+| S    | typeof == string
+| N    | typeof == number
+| F    | typeof == function
+| O    | typeof == object and not type A and not type E
+| B    | typeof == boolean
+| E    | `instanceof Error` OR `null` **(special: see below)**
+| Z    | == `null`
