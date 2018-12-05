@@ -51,3 +51,5 @@ validate.obj({ foo: "N?", bar: "S|N?" }, options );
 | B    | typeof == boolean
 | E    | `instanceof Error` OR `null` 
 | Z    | == `null`
+
+[See more about aproba syntax](https://github.com/iarna/aproba)
