@@ -1,0 +1,32 @@
+{
+  "name": "oproba",
+  "description": "Key-value object validator based on aproba",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [
+    "aproba",
+    "validate",
+    "validator",
+    "object",
+    "map",
+    "key-value"
+  ],
+  "author": "",
+  "jest": {
+    "verbose": true,
+    "testRegex": "/__tests__/.*\\.spec\\.js$",
+    "testEnvironment": "node"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^23.6.0",
+    "jest-cli": "^23.6.0"
+  },
+  "dependencies": {
+    "aproba": "^2.0.0"
+  }
+}
