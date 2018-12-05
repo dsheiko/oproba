@@ -49,5 +49,5 @@ validate.obj({ foo: "N?", bar: "S|N?" }, options );
 | F    | typeof == function
 | O    | typeof == object and not type A and not type E
 | B    | typeof == boolean
-| E    | `instanceof Error` OR `null` **(special: see below)**
+| E    | `instanceof Error` OR `null` 
 | Z    | == `null`
