@@ -6,15 +6,15 @@
 A 'rediculously light-weight' extension of [aproba](https://github.com/iarna/aproba) for key-value object validation
 
 ```js
-const { validate, validateObj } = require( "oproba" );
+const { validate, validate.obj } = require( "oproba" );
 // 'validate' is instance of aproba
 
 // Check that `options` object properties comply specified aproba schemas
-validateObj({ foo: "N", bar: "S|N" }, options );
+validate.obj({ foo: "N", bar: "S|N" }, options );
 
 
 // Validate a nested object
-validateObj({
+validate.obj({
   foo: {
     baz: {
       quiz: "S"
