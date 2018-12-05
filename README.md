@@ -3,7 +3,7 @@
 
 [![Build Status](https://travis-ci.org/dsheiko/oproba.png)](https://travis-ci.org/dsheiko/oproba)
 
-A 'rediculously light-weight' extension of [aproba - argument validator](https://github.com/iarna/aproba) for key-value object validation
+Extension of [aproba - argument validator](https://github.com/iarna/aproba) for key-value object validation
 
 ```js
 const validate = require( "oproba" );
