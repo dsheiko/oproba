@@ -22,3 +22,18 @@ validate.obj({
   },
   bar: "S|N" }, options );
 ```
+
+## Optional properties (`?` directive)
+```js
+validate.obj({ foo: "N?", bar: "S|N?" }, options );
+```
+
+## Explanatory error messages
+```js
+  validate.obj({
+    foo: { bar: "S|Z" }
+  }, {
+    foo: { bar: 1 }
+  });
+// throws `Error: Invalid type in property #foo.bar: Expected string or null but got number`
+```

@@ -33,8 +33,17 @@ validate.obj = function( schema, obj, propPath = "" ) {
     throw new newException( err.code, "validate.obj: " + err.message );
   }
   Object.keys( schema ).forEach(function( key ){
+    var isOptional = typeof schema[ key ] === "string" && schema[ key ].indexOf( "?" ) !== -1;
     if ( !( key in obj ) ) {
+      if ( isOptional ) {
+        // this key if fine
+        return;
+      }
       throw new newException( "EMISSINGPROP", "Missing required property #" + normalizeProp( key, propPath ) );
+    }
+    // aproba doesn't know "?" directive
+    if ( isOptional ) {
+      schema[ key ] = schema[ key ].replace( "?", "" );
     }
     // validate.obj( { foo: { bar: "A" } }, obj )
     if ( typeof schema[ key ] === "object" && schema[ key ] !== null && !Array.isArray( schema[ key ] ) ) {

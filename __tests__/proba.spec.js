@@ -28,7 +28,7 @@ describe( "proba", () => {
       }).toThrowError( /Missing required property #foo/ );
     });
 
-    it( "throw when missing property", () => {
+    it( "throw when invalid type", () => {
       expect(() => {
         validate.obj({
           "foo": "S"
@@ -36,13 +36,38 @@ describe( "proba", () => {
       }).toThrowError( /Invalid type in property #foo: Expected string but got number/ );
     });
 
+    it( "throw when invalid union type", () => {
+      expect(() => {
+        validate.obj({
+          "foo": "S|Z|A"
+        }, { foo: 1 });
+      }).toThrowError( /Invalid type in property #foo: Expected string, null or array but got number/ );
+    });
+
     it( "does not throw when valid", () => {
       expect(() => {
         validate.obj({
           "foo": "N",
-          "bar": "S"
+          "bar": "S|A"
         }, { foo: 1, bar: "string" });
       }).not.toThrowError();
+    });
+
+    it( "does not throw when valid and optional", () => {
+      expect(() => {
+        validate.obj({
+          "foo": "N",
+          "bar": "S?"
+        }, { foo: 1 });
+      }).not.toThrowError();
+    });
+
+    it( "throw when invalid type fo optional property", () => {
+      expect(() => {
+        validate.obj({
+          "foo": "S?"
+        }, { foo: 1 });
+      }).toThrowError( /Invalid type in property #foo: Expected string but got number/ );
     });
 
   });
@@ -73,7 +98,7 @@ describe( "proba", () => {
       }).toThrowError( /Invalid type in property #foo: Expected object but got number/ );
     });
 
-    it( "throw when 2st-level property of invalid type", () => {
+    it( "throw when 2st-level property on invalid type", () => {
       expect(() => {
         validate.obj({
           foo: { bar: "S" }
@@ -81,12 +106,29 @@ describe( "proba", () => {
       }).toThrowError( /Invalid type in property #foo.bar: Expected string but got number/ );
     });
 
+
+    it( "throw when 2st-level property of invalid union type", () => {
+      expect(() => {
+        validate.obj({
+          foo: { bar: "S|Z" }
+        }, { foo: { bar: 1 } });
+      }).toThrowError( /Invalid type in property #foo.bar: Expected string or null but got number/ );
+    });
+
+    it( "does not throw when 2st-level property missing but optional", () => {
+      expect(() => {
+        validate.obj({
+          foo: { bar: "S?" }
+        }, { foo: {  } });
+      }).not.toThrowError();
+    });
+
     it( "does not throw when 2st-level property valid", () => {
       expect(() => {
         validate.obj({
           bar: "A",
           foo: {
-            bar: "N",
+            bar: "N?",
             baz: "Z"
           }
         }, {
