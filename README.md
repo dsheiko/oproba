@@ -1,7 +1,12 @@
 # oproba
 [![NPM](https://nodei.co/npm/oproba.png)](https://nodei.co/npm/oproba/)
-
 [![Build Status](https://travis-ci.org/dsheiko/oproba.png)](https://travis-ci.org/dsheiko/oproba)
+
+⚠️ This project is no longer maintained. Please see one of these libraries instead:
+
+* [byContract](https://github.com/dsheiko/bycontract)
+
+---
 
 Extension of [aproba - argument validator](https://github.com/iarna/aproba) for key-value object validation
 
